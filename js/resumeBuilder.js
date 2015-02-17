@@ -74,6 +74,7 @@ var bio = {
     "twitter": "@godzirra",
     "email": "shawn.looker@gmail.com",
     "github": "slooker"
+
   },
   "skills": [
     "perl",

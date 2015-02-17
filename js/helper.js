@@ -206,11 +206,14 @@ function initializeMap() {
 
     // Iterates through the array of locations, creates a search object for each location
     for (var place in locations) {
-
+      if (!locations[place]) {
+        continue;
+      }
       // the search request object
       var request = {
         query: locations[place]
       };
+      
 
       // Actually searches the Google Maps API for location data and runs the callback
       // function with the search results after each search.
