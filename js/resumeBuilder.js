@@ -73,7 +73,9 @@ var bio = {
   "contacts": {
     "twitter": "@godzirra",
     "email": "shawn.looker@gmail.com",
-    "github": "slooker"
+    "github": "slooker",
+    "location": "Las Vegas, NV"
+
   },
   "skills": [
     "perl",
@@ -86,3 +88,89 @@ var bio = {
   "location": "Las Vegas, NV",
   "biopic": "http://i.imgur.com/WzbuQcx.jpg"
 }
+
+
+function generateBio() {
+HTMLheaderName = HTMLheaderName.replace("%data%", bio["name"]);
+  HTMLheaderRole = HTMLheaderRole.replace("%data%", bio["role"]);
+  $('#header').prepend(HTMLheaderRole);
+  $('#header').prepend(HTMLheaderName);
+
+  for (var key in bio["contacts"]) {
+    var contact = bio["contacts"][key];
+    var contactGeneric = HTMLcontactGeneric.replace("%contact%", key).replace("%data%", contact);
+    $('#topContacts').append(contactGeneric);
+    $('#footerContacts').append(contactGeneric);
+  }
+
+  HTMLbioPic = HTMLbioPic.replace("%data%", bio["biopic"]);
+  $('#header').append(HTMLbioPic);
+
+  HTMLWelcomeMsg = HTMLWelcomeMsg.replace("%data%", bio["welcomeMessage"]);
+  $('#header').append(HTMLWelcomeMsg);
+
+  $('#header').append(HTMLskillsStart);
+  
+  for (var i in bio["skills"]) {
+    var skillHTML = HTMLskills.replace("%data%", bio["skills"][i]);
+    $('#skillsH3').append(skillHTML);
+  }
+}
+
+function generateJobs() {
+  
+  for (var i in work["jobs"]) {
+    var $jqueryObject = $($.parseHTML(HTMLworkStart));
+    //$('#workExperience').append(HTMLworkStart);
+    var job = work["jobs"][i];
+    $jqueryObject.append(HTMLworkEmployer.replace("%data%",job["employer"]));
+    $jqueryObject.append(HTMLworkTitle.replace('%data%',job["title"]));
+    $jqueryObject.append(HTMLworkDates.replace('%data%',job["dates"]));
+    $jqueryObject.append(HTMLworkLocation.replace('%data%',job["location"]));
+    $jqueryObject.append(HTMLworkDescription.replace('%data%',job["description"]));
+    $('#workExperience').append($jqueryObject);
+  }
+}
+
+function generateProjects() {
+  for (var i in projects["projects"]) {
+    var $jqueryObject = $($.parseHTML(HTMLprojectStart));
+    //$('#workExperience').append(HTMLworkStart);
+    var project = projects["projects"][i];
+    $jqueryObject.append(HTMLprojectTitle.replace('%data%',project["title"]));
+    $jqueryObject.append(HTMLprojectDates.replace('%data%',project["dates"]));
+    $jqueryObject.append(HTMLprojectDescription.replace('%data%',project["description"]));
+    $('#projects').append($jqueryObject);
+  }
+}
+
+function generateEducation() {
+  for (var i in education["schools"]) {
+    var $jqueryObject = $($.parseHTML(HTMLschoolStart));
+    //$('#workExperience').append(HTMLworkStart);
+    var school = education["schools"][i];
+    console.log(school);
+    $jqueryObject.append(HTMLschoolName.replace('%data%',school["name"]));
+    $jqueryObject.append(HTMLschoolDegree.replace('%data%',school["degree"]));
+    $jqueryObject.append(HTMLschoolDates.replace('%data%',school["dates"]));
+    $jqueryObject.append(HTMLschoolLocation.replace('%data%',school["location"]));
+    $jqueryObject.append(HTMLschoolMajor.replace('%data%',school["majors"].join(',')));
+    $('#education').append($jqueryObject);
+  }
+}
+
+function generateOnlineCourses() {
+  for (var i in onlineCourses["onlineCourses"]) {
+    var $jqueryObject = $($.parseHTML(HTMLschoolStart));
+    //$('#workExperience').append(HTMLworkStart);
+    var course = onlineCourses["onlineCourses"][i];
+    $jqueryObject.append(HTMLonlineClasses);
+    $jqueryObject.append(HTMLonlineTitle.replace('%data%',course["title"]));
+    $jqueryObject.append(HTMLonlineSchool.replace('%data%',course["school"]));
+    $jqueryObject.append(HTMLonlineDates.replace('%data%',course["dates"]));
+    $jqueryObject.append(HTMLonlineURL.replace('%data%',course["url"]));
+    $('#education').append($jqueryObject);
+  }
+}
+
+
